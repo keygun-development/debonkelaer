@@ -1,0 +1,15 @@
+.c-button {
+    @apply px-5 py-2 font-bold rounded-md text-center duration-300;
+
+    &__blue {
+        @apply text-white bg-primary hover:bg-[#1cbcf3];
+    }
+
+    &__red {
+        @apply text-white bg-red-500 hover:bg-red-600;
+    }
+
+    &__grey {
+        @apply text-white bg-gray-500 hover:bg-gray-600;
+    }
+}

@@ -1,0 +1,28 @@
+.c-popup {
+    box-shadow: inset 0 0 0 1000px rgb(0 0 0 / 55%);
+    @apply fixed inset-0 z-10;
+
+    .c-popup__card {
+        @apply md:p-8 p-4 bg-gray-200 md:max-h-[700px] max-h-[500px] overflow-hidden rounded-xl;
+
+        .scrollbar {
+            @apply overflow-y-scroll relative md:max-h-[calc(700px-4rem)] max-h-[calc(500px-4rem)];
+
+            &::-webkit-scrollbar {
+                @apply w-2.5;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                @apply rounded-lg bg-gray-600;
+
+                &:hover {
+                    @apply bg-gray-700;
+                }
+            }
+        }
+    }
+}
+
+.c-popup__container {
+    @apply h-full max-w-[1100px] mx-auto px-8;
+}

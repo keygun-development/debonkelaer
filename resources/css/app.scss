@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Rubik&display=swap');
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import "globals";
+
+@import "components/header";
+@import "components/footer";
+@import "components/button";
+@import "components/article";
+@import "components/popup";
+@import "components/form";

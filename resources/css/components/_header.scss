@@ -1,0 +1,25 @@
+.c-header__menu {
+  ul {
+    @apply flex;
+
+    li {
+      @apply mx-4 text-xl text-gray-300 pb-3 pt-3 px-2;
+
+      a {
+        @apply duration-300;
+
+        &:hover {
+          @apply text-black;
+        }
+      }
+
+      &.current-menu-item {
+        @apply border-b-[3px] border-[#80e1ff];
+
+        a {
+          @apply font-bold text-black;
+        }
+      }
+    }
+  }
+}

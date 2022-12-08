@@ -1,0 +1,20 @@
+.c-footer {
+  p {
+    @apply text-gray-400 duration-300 text-sm leading-6;
+
+    &:hover {
+      @apply text-white
+    }
+  }
+  a {
+    @apply text-sm mt-2 text-gray-400 duration-300;
+
+    &:first-child {
+      @apply mt-0;
+    }
+
+    &:hover {
+      @apply text-white;
+    }
+  }
+}
