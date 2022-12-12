@@ -2,9 +2,16 @@
     @section('content')
         <div class="main-container">
             <div class="flex w-10/12 flex-col border-b">
-                <h1 class="font-bold">
-                    {{ $post->post_title }}
-                </h1>
+                <div class="flex justify-between">
+                    <h1 class="font-bold">
+                        {{ $post->post_title }}
+                    </h1>
+                    @can('isAdmin')
+                        <a href="/dashboard/post/{{ $post->post_slug }}" class="c-button c-button__blue">
+                            Post aanpassen
+                        </a>
+                    @endcan
+                </div>
                 @if($post->post_image)
                     <div class="mt-4">
                         <img src="{{ asset($post->post_image) }}"/>

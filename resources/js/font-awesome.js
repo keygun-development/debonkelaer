@@ -4,12 +4,12 @@ import {library, dom} from '@fortawesome/fontawesome-svg-core';
 // import the needed icons here
 import {
     faXmark,
-    faChevronLeft
+    faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
     faXmark,
-    faChevronLeft
+    faChevronRight
 );
 
 dom.watch();

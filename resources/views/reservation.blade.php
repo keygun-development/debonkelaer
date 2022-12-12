@@ -7,7 +7,7 @@
             <div class="flex justify-between mt-4">
                 <div class="w-8/12">
                     <h2>
-                        Alle reserveringen
+                        Overzicht alle reserveringen
                     </h2>
                     <calendar
                         :layout="'listWeek'"
@@ -22,7 +22,80 @@
                 ]'
                     ></calendar>
                 </div>
-                <div class="w-3/12 flex flex-col items-end">
+                <div class="w-3/12 flex flex-col">
+                    @can('isAdmin')
+                        <div class="mb-4">
+                            <popup
+                                :width="'w-10/12'"
+                                ref="popupref4"
+                            >
+                                <template #openpopup>
+                                    <button class="c-button c-button__blue"
+                                            @click="this.$refs['popupref4'].openPopup()">
+                                        Baan afschermen
+                                    </button>
+                                </template>
+                                <template #popup>
+                                    <form method="POST" action="/reserveren/baanafschermen">
+                                        @csrf
+                                        <div class="flex justify-between">
+                                            <div class="w-full">
+                                                <div>
+                                                    <label>
+                                                        Baan:
+                                                    </label>
+                                                    <select
+                                                        v-model="this.$refs['popupref4'].reservation.track"
+                                                        @change="this.$refs['popupref4'].update()"
+                                                        class="c-form__input-float">
+                                                        <option>
+                                                            1
+                                                        </option>
+                                                        <option>
+                                                            2
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>
+                                                        Datum:
+                                                    </label>
+                                                    <input
+                                                        v-model="this.$refs['popupref4'].reservation.date"
+                                                        @change="this.$refs['popupref4'].update()"
+                                                        class="c-form__input-float"
+                                                        type="date"/>
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>
+                                                        Tijd vanaf:
+                                                    </label>
+                                                    <select class="c-form__input-float">
+                                                        @foreach($times as $time)
+                                                            <option>{{ $time }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>
+                                                        Tijd tot:
+                                                    </label>
+                                                    <select class="c-form__input-float">
+                                                        @foreach($times as $time)
+                                                            <option>{{ $time }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="submit" value="Aanmaken"
+                                               class="c-button c-button__blue cursor-pointer mt-4"
+                                        />
+                                    </form>
+                                </template>
+                            </popup>
+                        </div>
+                    @endcan
                     @if($myReservation)
                         <h2>
                             Uw reservering
@@ -209,11 +282,12 @@
                             ref="popupref3"
                         >
                             <template #openpopup>
-                                <button class="c-button c-button__blue" @click="this.$refs['popupref3'].openPopup()">
+                                <button class="c-button c-button__blue"
+                                        @click="this.$refs['popupref3'].openPopup({{ json_encode(Auth::user()->name) }})">
                                     Maak een reservering
                                 </button>
                             </template>
-                            <template #popup>
+                            <template #popup="slotprops">
                                 <form method="POST" action="/reserveren/create">
                                     @csrf
                                     <div class="flex justify-between">
@@ -222,62 +296,75 @@
                                                 <label for="participant1">
                                                     Medespeler 1:
                                                 </label>
+                                                <input required
+                                                       readonly
+                                                       name="participant1"
+                                                       type="hidden"
+                                                       value="{{ Auth::user()->id }}" />
                                                 <input type="text"
                                                        class="c-form__input-float"
-                                                       name="participant1"
-                                                       value="{{ Auth::user()->name }}"
-                                                       readonly/>
+                                                       v-model="this.$refs['popupref3'].reservation.participant1"
+                                                       readonly />
                                             </div>
                                             <div class="mt-4">
                                                 <label for="participant2">
                                                     Medespeler 2:
                                                 </label>
                                                 <input
-                                                    list="users2"
                                                     name="participant2"
-                                                    class="c-form__input-float"
+                                                    v-model="this.$refs['popupref3'].reservation.participant2"
+                                                    type="hidden"
                                                 />
-                                                <datalist id="users2">
+                                                <select class="c-form__input-float"
+                                                        @change="this.$refs['popupref3'].update()"
+                                                        v-model="this.$refs['popupref3'].reservation.participant2"
+                                                        id="users2">
                                                     @foreach($users as $user)
-                                                        <option value="{{ $user->name }}">
+                                                        <option value="{{ $user->id }}">
                                                             {{ $user->name }}
                                                         </option>
                                                     @endforeach
-                                                </datalist>
+                                                </select>
                                             </div>
                                             <div class="mt-4">
                                                 <label for="participant3">
                                                     Medespeler 3:
                                                 </label>
                                                 <input
-                                                    list="users3"
                                                     name="participant3"
-                                                    class="c-form__input-float"
+                                                    v-model="this.$refs['popupref3'].reservation.participant3"
+                                                    type="hidden"
                                                 />
-                                                <datalist id="users3">
+                                                <select class="c-form__input-float"
+                                                        v-model="this.$refs['popupref3'].reservation.participant3"
+                                                        @change="this.$refs['popupref3'].update()"
+                                                        id="users3">
                                                     @foreach($users as $user)
-                                                        <option value="{{ $user->name }}">
+                                                        <option value="{{ $user->id }}">
                                                             {{ $user->name }}
                                                         </option>
                                                     @endforeach
-                                                </datalist>
+                                                </select>
                                             </div>
                                             <div class="mt-4">
                                                 <label for="participant4">
                                                     Medespeler 4:
                                                 </label>
                                                 <input
-                                                    list="users4"
                                                     name="participant4"
-                                                    class="c-form__input-float"
+                                                    v-model="this.$refs['popupref3'].reservation.participant4"
+                                                    type="hidden"
                                                 />
-                                                <datalist id="users4">
+                                                <select class="c-form__input-float"
+                                                        v-model="this.$refs['popupref3'].reservation.participant4"
+                                                        @change="this.$refs['popupref3'].update()"
+                                                        id="users4">
                                                     @foreach($users as $user)
-                                                        <option value="{{ $user->name }}">
+                                                        <option value="{{ $user->id }}">
                                                             {{ $user->name }}
                                                         </option>
                                                     @endforeach
-                                                </datalist>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="w-5/12">
@@ -285,7 +372,11 @@
                                                 <label>
                                                     Baan:
                                                 </label>
-                                                <select class="c-form__input-float">
+                                                <select
+                                                    name="track"
+                                                    v-model="this.$refs['popupref3'].reservation.track"
+                                                    @change="this.$refs['popupref3'].update()"
+                                                    class="c-form__input-float">
                                                     <option>
                                                         1
                                                     </option>
@@ -298,18 +389,30 @@
                                                 <label>
                                                     Datum:
                                                 </label>
-                                                <input class="c-form__input-float" type="date"/>
+                                                <input
+                                                    v-model="this.$refs['popupref3'].reservation.date"
+                                                    @change="this.$refs['popupref3'].update()"
+                                                    class="c-form__input-float"
+                                                    name="date"
+                                                    type="date"/>
                                             </div>
-                                            <div class="mt-4">
-                                                <label>
-                                                    Tijd:
-                                                </label>
-                                                <select class="c-form__input-float">
-                                                    @foreach($times as $time)
-                                                        {{ $time }}
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                            <template v-if="Object.keys(slotprops.times).length > 0">
+                                                <div class="mt-4">
+                                                    <label>
+                                                        Tijd:
+                                                    </label>
+                                                    <select name="time" class="c-form__input-float">
+                                                        <option v-for="result in slotprops.times">@{{ result }}</option>
+                                                    </select>
+                                                </div>
+                                            </template>
+                                            <template v-if="slotprops.error">
+                                                <div class="mt-4">
+                                                    <p class="text-red-500">
+                                                        @{{ slotprops.error }}
+                                                    </p>
+                                                </div>
+                                            </template>
                                         </div>
                                     </div>
                                     <input type="submit" value="Aanmaken"
@@ -318,6 +421,15 @@
                                 </form>
                             </template>
                         </popup>
+                    @endif
+                    @if($errors->any())
+                        <div class="text-red-500">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
                 </div>
             </div>

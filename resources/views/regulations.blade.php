@@ -1,9 +1,16 @@
 <x-app-layout>
     @section('content')
         <div class="main-container">
-            <h1 class="font-bold">
-                Reglement
-            </h1>
+            <div class="flex justify-between">
+                <h1 class="font-bold">
+                    Reglement
+                </h1>
+                @can('isAdmin')
+                    <a href="/dashboard/reglement" class="c-button c-button__blue">
+                        Reglement aanpassen
+                    </a>
+                @endcan
+            </div>
             <p class="mt-4">
                 T.C. Lievelde Baanreglement tennispark “De Bonkelaer”
             </p>

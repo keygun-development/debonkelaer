@@ -12,21 +12,21 @@ class Reservation extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'creator', 'id');
+        return $this->belongsTo(User::class, 'user_1_id', 'id');
     }
 
     public function participant1(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'participant_1_id', 'id');
+        return $this->belongsTo(User::class, 'user_2_id', 'id');
     }
 
     public function participant2(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'participant_2_id', 'id');
+        return $this->belongsTo(User::class, 'user_3_id', 'id');
     }
 
     public function participant3(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'participant_3_id', 'id');
+        return $this->belongsTo(User::class, 'user_4_id', 'id');
     }
 }

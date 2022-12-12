@@ -1,9 +1,16 @@
 <x-app-layout>
     @section('content')
         <div class="main-container">
-            <h1>
-                Tarieven
-            </h1>
+            <div class="flex justify-between">
+                <h1>
+                    Tarieven
+                </h1>
+                @can('isAdmin')
+                    <a href="/dashboard/tarieven" class="c-button c-button__blue">
+                        Tarieven aanpassen
+                    </a>
+                @endcan
+            </div>
             <div class="my-4">
                 <h2>
                     Tarieven seizoen: ({{ \Carbon\Carbon::now()->year }})

@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->integer('creator');
-            $table->integer('participant_1_id');
-            $table->integer('participant_2_id')->nullable();
-            $table->integer('participant_3_id')->nullable();
+            $table->integer('user_1_id')->nullable();
+            $table->integer('user_2_id')->nullable();
+            $table->integer('user_3_id')->nullable();
+            $table->integer('user_4_id')->nullable();
             $table->date('date');
             $table->string('time');
+            $table->string('endtime')->nullable();
             $table->integer('track');
             $table->timestamps();
         });

@@ -10,7 +10,7 @@
                         </div>
                     </div>
                     <div class="scrollbar">
-                        <slot name="popup"></slot>
+                        <slot :times="times" :error="error" name="popup"></slot>
                     </div>
                 </div>
             </div>
@@ -19,6 +19,7 @@
 </template>
 <script>
 export default {
+
     mounted() {
         this.open = this.startOpen ?? false
     },
@@ -30,13 +31,26 @@ export default {
 
     data() {
         return {
-            open: false
+            open: false,
+            reservation: {
+                participant1: '',
+                participant2: '',
+                participant3: '',
+                participant4: '',
+                track: '',
+                date: ''
+            },
+            times: {},
+            error: ''
         }
     },
 
     methods: {
-        openPopup: function () {
+        openPopup: function (data) {
             this.open = true
+            if (data) {
+                this.reservation.participant1 = data
+            }
         },
 
         close: function () {
@@ -44,7 +58,18 @@ export default {
         },
 
         update: function() {
-            
+            axios.get('/api/reservation/availability', {
+                params: {
+                    reservation: this.reservation
+                }
+            })
+                .then(response => {
+                    this.times = response.data
+                })
+                .catch(err => {
+                    console.log(err.response.data)
+                    this.error = err.response.data
+                })
         }
     }
 }

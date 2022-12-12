@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class, 'author_id');
     }
+
+    public function reservation(): BelongsTo
+    {
+        return $this->belongsTo(Reservation::class, ['user_1_id', 'user_2_id', 'user_3_id', 'user_4_id'], 'id');
+    }
 }
