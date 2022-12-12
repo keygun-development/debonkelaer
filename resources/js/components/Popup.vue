@@ -41,6 +41,10 @@ export default {
 
         close: function () {
             this.open = false
+        },
+
+        update: function() {
+            
         }
     }
 }

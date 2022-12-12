@@ -6,6 +6,7 @@ use App\Http\Traits\TimeTrait;
 use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
@@ -25,5 +26,10 @@ class ReservationController extends Controller
             'users' => User::all(),
             'times' => $this->timeSlots()
         ]);
+    }
+
+    public function create(Request $request)
+    {
+        dd($request->participant1);
     }
 }
