@@ -1,12 +1,12 @@
 .c-header__menu {
   ul {
-    @apply flex;
+    @apply lg:flex;
 
     li {
-      @apply mx-4 text-xl text-gray-300 pb-3 pt-3 px-2;
+      @apply lg:mx-1 lg:text-xl lg:text-gray-300 pb-3 pt-3 lg:px-2 mb-8 lg:mb-0;
 
       a {
-        @apply duration-300;
+        @apply duration-300 absolute lg:relative w-full px-4 py-4;
 
         &:hover {
           @apply text-black;
@@ -14,12 +14,67 @@
       }
 
       &.current-menu-item {
-        @apply border-b-[3px] border-[#80e1ff];
+        @apply lg:border-b-[3px] lg:border-[#80e1ff];
 
         a {
-          @apply font-bold text-black;
+          @apply font-bold lg:text-black text-white bg-[#80e1ff] lg:bg-transparent;
         }
       }
     }
   }
+}
+
+.c-mobile__menu {
+    @apply h-0 flex duration-300 overflow-hidden flex-col shadow-md;
+
+    .active-rotate {
+        svg {
+            @apply rotate-180;
+        }
+    }
+
+    &.active {
+        @apply overflow-y-scroll;
+    }
+
+    a {
+        @apply w-full p-4;
+
+        &.router-link-exact-active {
+            @apply bg-black text-white;
+        }
+
+        &:not(.router-link-exact-active) {
+            &:hover {
+                @apply font-semibold;
+            }
+        }
+    }
+}
+
+.c-header__bars {
+    @apply absolute right-[10px] duration-100;
+
+    div {
+        @apply block duration-300 rotate-0 ml-0 bg-black w-8 h-1 rounded-lg;
+    }
+
+    &.menu-open {
+        .one {
+            transform: rotate(135deg);
+            margin-bottom: -1px;
+            margin-top: 9px
+        }
+
+        .two {
+            margin-left: -10px;
+            margin-top: -5px;
+            background-color: transparent;
+        }
+
+        .three {
+            transform: rotate(-135deg);
+            margin-top: -7px;
+        }
+    }
 }

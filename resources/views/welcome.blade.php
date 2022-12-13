@@ -3,7 +3,7 @@
         <div class="main-container">
             <div class="w-full md:flex justify-between">
                 <div class="md:w-5/12">
-                    <div class="flex justify-between">
+                    <div class="flex justify-between flex-wrap">
                         <h1 class="font-bold">
                             Home
                         </h1>

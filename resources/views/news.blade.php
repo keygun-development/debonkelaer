@@ -6,12 +6,12 @@
                     Nieuws
                 </h1>
                 @can('isAdmin')
-                    <a href="/dashboard/newpost" class="c-button c-button__blue">
+                    <a href="/dashboard/nieuws/nieuwepost" class="c-button c-button__blue">
                         Nieuwe post
                     </a>
                 @endcan
             </div>
-            <div class="grid grid-cols-2 gap-4 mt-4">
+            <div class="grid md:grid-cols-2 grid-cols-1 gap-4 mt-4">
                 @foreach($posts as $post)
                     <x-latest-news :post="$post"/>
                 @endforeach

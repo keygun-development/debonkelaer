@@ -7,27 +7,25 @@
     {{--    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">--}}
 </head>
 <body>
-<div class="relative min-h-screen">
+<div class="relative max-h-screen min-h-screen md:overflow-hidden">
     <x:notify-messages/>
     @notifyJs
     <div id="header">
-        @include('partials.navigation')
         @if(Auth::check())
             @include('partials.authNavigation')
         @endif
-        @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="main-container">
-                    {{ $header }}
+    </div>
+    <div class="site-content flex flex-col md:flex-row" id="app">
+        <div id="sidebar" class="md:w-2/12 w-full">
+            @include('components.sidebar')
+        </div>
+        <div id="content" class="md:w-10/12 w-full">
+            <div class="p-4 w-full mx-auto h-full">
+                <div class="bg-white shadow-md rounded-xl p-4 max-h-[87vh] overflow-scroll">
+                    @yield('content')
                 </div>
-            </header>
-        @endif
-    </div>
-    <div class="site-content" id="app">
-        @yield('content')
-    </div>
-    <div id="footer">
-        @include('partials.footer')
+            </div>
+        </div>
     </div>
 </div>
 @vite(['resources/js/app.js'])

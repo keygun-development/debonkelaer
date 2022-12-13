@@ -6,6 +6,10 @@ use App\Http\Traits\TimeTrait;
 use App\Models\Reservation;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +17,7 @@ class ReservationController extends Controller
 {
     use TimeTrait;
 
-    public function index()
+    public function index(): Factory|View|Application
     {
         return view('reservation', ['reservations' => Reservation::with('user')->get(),
             'myReservation' => Reservation::where(function ($query) {
@@ -23,12 +27,12 @@ class ReservationController extends Controller
                     ->orWhere('user_4_id', Auth::id());
             })->with('user', 'participant1', 'participant2', 'participant3')
                 ->first(),
-            'users' => User::all(),
+            'users' => User::where('role_id', 2)->get(),
             'times' => $this->timeSlots()
         ]);
     }
 
-    public function create(Request $request)
+    public function create(Request $request): RedirectResponse
     {
         $request->validate([
             'participant1' => 'required',
@@ -49,26 +53,41 @@ class ReservationController extends Controller
         $reservation->track = $request->track;
 
         $reservation->save();
-        return redirect()->back()->with('message', 'Reservering aangemaakt.');
+        notify()->success('Reservering aangemaakt!');
+        return redirect()->back();
+    }
+
+    public function delete(Request $request)
+    {
+        $reservation = Reservation::where('id', $request->reservation);
+        $reservation->delete();
+        notify()->success('Reservering verwijderd.');
+        return redirect()->back();
     }
 
     public function checkAvailability(Request $request)
     {
         if ($request->reservation['participant1'] &&
             $request->reservation['participant2'] &&
-            $request->reservation['participant3'] &&
-            $request->reservation['participant4'] &&
             $request->reservation['track'] &&
             $request->reservation['date']) {
             $reservations = Reservation::where(function ($query) use ($request) {
-                for ($i = 1; $i <= 4; $i++) {
-                    for ($x = 1; $x <= 4; $x++) {
-                        $query->where('user_' . $x . '_id', $request->reservation['participant' . $i])
-                            ->orWhere('user_' . $x . '_id', $request->reservation['participant' . $i])
-                            ->orWhere('user_' . $x . '_id', $request->reservation['participant' . $i])
-                            ->orWhere('user_' . $x . '_id', $request->reservation['participant' . $i]);
-                    }
-                }
+                $query->where('user_1_id', $request->reservation['participant1'])
+                    ->orWhere('user_2_id', $request->reservation['participant1'])
+                    ->orWhere('user_3_id', $request->reservation['participant1'])
+                    ->orWhere('user_4_id', $request->reservation['participant1'])
+                    ->orWhere('user_1_id', $request->reservation['participant2'])
+                    ->orWhere('user_2_id', $request->reservation['participant2'])
+                    ->orWhere('user_3_id', $request->reservation['participant2'])
+                    ->orWhere('user_4_id', $request->reservation['participant2'])
+                    ->orWhere('user_1_id', $request->reservation['participant3'])
+                    ->orWhere('user_2_id', $request->reservation['participant3'])
+                    ->orWhere('user_3_id', $request->reservation['participant3'])
+                    ->orWhere('user_4_id', $request->reservation['participant3'])
+                    ->orWhere('user_1_id', $request->reservation['participant4'])
+                    ->orWhere('user_2_id', $request->reservation['participant4'])
+                    ->orWhere('user_3_id', $request->reservation['participant4'])
+                    ->orWhere('user_4_id', $request->reservation['participant4']);
             })
                 ->where('track', $request->reservation['track'])
                 ->where('date', $request->reservation['date'])

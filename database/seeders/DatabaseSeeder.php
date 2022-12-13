@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             RegulationSeeder::class,
             ImpressionSeeder::class,
             UserSeeder::class,
-            ReservationSeeder::class
+            ReservationSeeder::class,
+            RoleSeeder::class
         ]);
     }
 }

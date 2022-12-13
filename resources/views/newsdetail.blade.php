@@ -1,13 +1,13 @@
 <x-app-layout>
     @section('content')
         <div class="main-container">
-            <div class="flex w-10/12 flex-col border-b">
-                <div class="flex justify-between">
+            <div class="flex md:w-10/12 w-full flex-col border-b">
+                <div class="flex justify-between flex-wrap">
                     <h1 class="font-bold">
                         {{ $post->post_title }}
                     </h1>
                     @can('isAdmin')
-                        <a href="/dashboard/post/{{ $post->post_slug }}" class="c-button c-button__blue">
+                        <a href="/dashboard/nieuws/{{ $post->post_slug }}" class="c-button c-button__blue">
                             Post aanpassen
                         </a>
                     @endcan
@@ -25,9 +25,9 @@
                 <h3>
                     Auteur
                 </h3>
-                <a href="/user/{{ $post->author->id }}">
+                <p>
                     {{ $post->author->name }}
-                </a>
+                </p>
             </div>
         </div>
     @endsection

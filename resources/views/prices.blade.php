@@ -1,7 +1,7 @@
 <x-app-layout>
     @section('content')
         <div class="main-container">
-            <div class="flex justify-between">
+            <div class="flex justify-between flex-wrap">
                 <h1>
                     Tarieven
                 </h1>

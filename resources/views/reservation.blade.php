@@ -4,8 +4,8 @@
             <h1 class="font-bold">
                 Reserveren
             </h1>
-            <div class="flex justify-between mt-4">
-                <div class="w-8/12">
+            <div class="flex flex-col-reverse md:flex-row md:justify-between mt-4">
+                <div class="md:w-8/12 w-full">
                     <h2>
                         Overzicht alle reserveringen
                     </h2>
@@ -15,18 +15,18 @@
                 @foreach($reservations as $reservation)
                     {
                         id: "{!! $reservation->id !!}",
-                        title: "{!! $reservation->user->name !!}",
+                        title: "{!! $reservation->user->name !!} - Baan: {!! $reservation->track !!}",
                         start: "{!! $reservation->date !!}T{!! $reservation->time !!}"
                     },
                 @endforeach
                 ]'
                     ></calendar>
                 </div>
-                <div class="w-3/12 flex flex-col">
+                <div class="md:w-3/12 flex flex-col mb-4 md:mb-0">
                     @can('isAdmin')
                         <div class="mb-4">
                             <popup
-                                :width="'w-10/12'"
+                                :width="'md:w-10/12 w-full'"
                                 ref="popupref4"
                             >
                                 <template #openpopup>
@@ -123,7 +123,7 @@
                             <div class="flex">
                                 <popup
                                     ref="popupref2"
-                                    :width="'w-10/12'"
+                                    :width="'md:w-10/12 w-full'"
                                 >
                                     <template #openpopup>
                                         <div class="mt-4">
@@ -135,8 +135,8 @@
                                     </template>
                                     <template #popup>
                                         <form method="POST" action="/reservation/change">
-                                            <div class="flex justify-between">
-                                                <div class="w-5/12">
+                                            <div class="flex flex-col md:flex-row justify-between">
+                                                <div class="md:w-5/12 w-full">
                                                     <input type="hidden" value="{{ $myReservation->id }}"/>
                                                     <div>
                                                         <label for="participant1">
@@ -200,7 +200,7 @@
                                                         </datalist>
                                                     </div>
                                                 </div>
-                                                <div class="w-5/12">
+                                                <div class="md:w-5/12 w-full">
                                                     <div>
                                                         <label>
                                                             Baan:
@@ -267,8 +267,13 @@
                                                        class="c-button c-button__grey cursor-pointer mr-4">
                                                         Annuleren
                                                     </a>
-                                                    <input type="submit" value="Verwijderen"
-                                                           class="c-button c-button__red cursor-pointer"/>
+                                                    <form method="POST" action="{{ route('reservation.delete') }}">
+                                                        @csrf
+                                                        <input type="hidden" name="reservation"
+                                                               value="{{ $myReservation->id }}"/>
+                                                        <input type="submit" value="Verwijderen"
+                                                               class="c-button c-button__red cursor-pointer"/>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </template>
@@ -278,7 +283,7 @@
                         </div>
                     @else
                         <popup
-                            :width="'w-10/12'"
+                            :width="'md:w-10/12 w-full'"
                             ref="popupref3"
                         >
                             <template #openpopup>
@@ -290,8 +295,8 @@
                             <template #popup="slotprops">
                                 <form method="POST" action="/reserveren/create">
                                     @csrf
-                                    <div class="flex justify-between">
-                                        <div class="w-5/12">
+                                    <div class="flex flex-col md:flex-row justify-between">
+                                        <div class="md:w-5/12 w-full">
                                             <div>
                                                 <label for="participant1">
                                                     Medespeler 1:
@@ -300,11 +305,11 @@
                                                        readonly
                                                        name="participant1"
                                                        type="hidden"
-                                                       value="{{ Auth::user()->id }}" />
+                                                       value="{{ Auth::user()->id }}"/>
                                                 <input type="text"
                                                        class="c-form__input-float"
                                                        v-model="this.$refs['popupref3'].reservation.participant1"
-                                                       readonly />
+                                                       readonly/>
                                             </div>
                                             <div class="mt-4">
                                                 <label for="participant2">
@@ -367,7 +372,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="w-5/12">
+                                        <div class="md:w-5/12 w-full">
                                             <div>
                                                 <label>
                                                     Baan:
@@ -422,15 +427,17 @@
                             </template>
                         </popup>
                     @endif
-                    @if($errors->any())
-                        <div class="text-red-500">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    <div class="mt-4">
+                        @if($errors->any())
+                            <div class="text-red-500">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
