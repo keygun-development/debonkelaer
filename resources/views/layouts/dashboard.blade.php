@@ -21,7 +21,7 @@
         </div>
         <div id="content" class="md:w-10/12 w-full">
             <div class="p-4 w-full mx-auto h-full">
-                <div class="bg-white shadow-md rounded-xl p-4 max-h-[87vh] overflow-scroll">
+                <div class="bg-white shadow-md rounded-xl p-4 max-h-[87vh] overflow-y-scroll">
                     @yield('content')
                 </div>
             </div>

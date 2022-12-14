@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('reservation_user', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->string('time');
-            $table->string('endtime')->nullable();
-            $table->integer('track');
+            $table->integer('user_id');
+            $table->integer('reservation_id');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('reservation_user');
     }
 };

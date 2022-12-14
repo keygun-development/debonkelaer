@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class  User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -52,8 +51,8 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'author_id');
     }
 
-    public function reservation(): BelongsTo
+    public function reservation(): BelongsToMany
     {
-        return $this->belongsTo(Reservation::class, ['user_1_id', 'user_2_id', 'user_3_id', 'user_4_id'], 'id');
+        return $this->belongsToMany(Reservation::class, 'reservation_user');
     }
 }

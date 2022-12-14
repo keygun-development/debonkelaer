@@ -20,10 +20,6 @@ class ReservationFactory extends Factory
     {
         $times = $this->timeSlots();
         return [
-            'user_1_id' => fake()->numberBetween(2, 10),
-            'user_2_id' => fake()->numberBetween(2, 10),
-            'user_3_id' => fake()->numberBetween(2, 10),
-            'user_4_id' => fake()->numberBetween(2, 10),
             'date' => fake()->dateTimeBetween('-30 days', '+30 days'),
             'time' => $times[array_rand($times)],
             'track' => fake()->numberBetween(1, 2)

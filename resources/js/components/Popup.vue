@@ -34,11 +34,12 @@ export default {
             open: false,
             reservation: {
                 participant1: '',
-                participant2: '',
-                participant3: '',
-                participant4: '',
+                participant2: 'peo2',
+                participant3: 'peo3',
+                participant4: 'peo4',
                 track: '',
-                date: ''
+                date: '',
+                time: ''
             },
             times: {},
             error: ''
@@ -46,9 +47,19 @@ export default {
     },
 
     methods: {
-        openPopup: function (data) {
+        openPopup: function (data, additionals = null) {
             this.open = true
-            if (data) {
+            if (Array.isArray(data)) {
+                this.reservation.participant1 = data[0].id
+                if (typeof data[1] !== 'undefined') this.reservation.participant2 = data[1].id
+                if (typeof data[2] !== 'undefined') this.reservation.participant3 = data[2].id
+                if (typeof data[3] !== 'undefined') this.reservation.participant4 = data[3].id
+                if (additionals) {
+                    this.reservation.track = additionals.track
+                    this.reservation.date = additionals.date
+                    this.reservation.time = additionals.time
+                }
+            } else {
                 this.reservation.participant1 = data
             }
         },
@@ -57,7 +68,7 @@ export default {
             this.open = false
         },
 
-        update: function() {
+        update: function () {
             axios.get('/api/reservation/availability', {
                 params: {
                     reservation: this.reservation
