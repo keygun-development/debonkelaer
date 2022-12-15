@@ -70,6 +70,28 @@ class ReservationController extends Controller
         return redirect()->back();
     }
 
+    public function update(Request $request)
+    {
+        $reservation = Reservation::where('id', $request->id)->first();
+        $reservation->date = Carbon::parse($request->date)->format('Y-m-d');
+        $reservation->time = $request->time;
+        $reservation->track = $request->track;
+
+        $reservation->update();
+
+        $users = User::whereIn('id', [
+            $request->participant1,
+            $request->participant2,
+            $request->participant3,
+            $request->participant4
+        ])
+            ->get();
+
+        $reservation->users()->sync($users);
+        notify()->success('Reservering geupdated!');
+        return redirect()->back();
+    }
+
     public function checkAvailability(Request $request): ?JsonResponse
     {
         if ($request->reservation['track'] && $request->reservation['date']) {
@@ -78,9 +100,20 @@ class ReservationController extends Controller
                 ->orderBy('time', 'asc')
                 ->get();
 
-            return empty($this->getTimes($reservations)) ?
+            $thisReservation = null;
+            if ($request->reservation['id']) {
+                $thisReservation = Reservation::where('id', $request->reservation['id'])
+                    ->first();
+            }
+
+            $times = $this->getTimes($reservations);
+            if ($thisReservation) {
+                $times[] = $thisReservation->time;
+                sort($times);
+            }
+            return empty($times) ?
                 response()->json('Met deze combinatie zijn er geen tijden beschikbaar.', 404) :
-                response()->json($this->getTimes($reservations));
+                response()->json($times);
         }
         return null;
     }
@@ -90,11 +123,23 @@ class ReservationController extends Controller
         $allTimes = $this->timeSlots();
 
         foreach ($reservations as $reservation) {
+            if ($reservation->endtime) {
+                foreach($this->removeRoundHours($allTimes, $reservation->time, $reservation->endtime) as $key => $hour) {
+                    unset($allTimes[$key]);
+                }
+            }
             if (($k = array_search($reservation->time, $allTimes)) !== false) {
                 unset($allTimes[$k]);
             }
         }
 
         return $allTimes;
+    }
+
+    public function removeRoundHours($hours, $starthour, $endhour): array
+    {
+        return array_filter($hours, function($hour) use ($starthour, $endhour) {
+            return $hour >= $starthour && $hour < $endhour;
+        });
     }
 }

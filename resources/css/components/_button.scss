@@ -12,4 +12,8 @@
     &__grey {
         @apply text-white bg-gray-500 hover:bg-gray-600;
     }
+
+    &__green {
+        @apply text-white bg-green-500 hover:bg-green-600;
+    }
 }

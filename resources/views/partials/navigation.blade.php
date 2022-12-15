@@ -1,13 +1,9 @@
 <div class="bg-blue-50 shadow-sm">
     <div class="main-container">
         <div class="flex justify-between items-center">
-            <div class="sm:w-2/12 w-8/12">
-                <div class="w-6/12">
-                    <a href="/">
-                        <img src="{{ asset('images/logo.webp') }}" alt="Tclievelde Logo"/>
-                    </a>
-                </div>
-            </div>
+            <a href="/">
+                <img class="max-w-[100px] object-fit" src="{{ asset('images/logo.webp') }}" alt="Tclievelde Logo"/>
+            </a>
             <div class="c-header__menu flex items-end">
                 <div class="hidden lg:flex justify-center w-full">
                     <x-navigation></x-navigation>
@@ -26,14 +22,16 @@
                             </div>
                         </template>
                         <template #menuopen>
-                            <div class="absolute top-0 bottom-0 sm:w-4/12 w-8/12 right-0 bg-blue-50 shadow-lg py-20 z-[2]">
+                            <div
+                                class="absolute top-0 bottom-0 sm:w-4/12 w-8/12 right-0 bg-blue-50 shadow-lg py-20 z-[2]">
                                 <div class="flex flex-col">
                                     <x-navigation></x-navigation>
                                     <div class="block lg:hidden px-4 mt-8">
                                         @if(Auth::check())
                                             <form method="POST" action="{{ route('logout') }}">
                                                 @csrf
-                                                <a class="c-button c-button__blue inline-block cursor-pointer" href="{{ route('logout') }}"
+                                                <a class="c-button c-button__blue inline-block cursor-pointer"
+                                                   href="{{ route('logout') }}"
                                                    onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                                     Uitloggen

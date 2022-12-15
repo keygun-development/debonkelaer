@@ -2,7 +2,7 @@
 @section('content')
     <div class="flex justify-between flex-wrap">
         <h1>
-            Tarieven
+            Reglementen
         </h1>
         <popup
             :width="'md:w-10/12 w-full'"
@@ -11,14 +11,14 @@
             <template #openpopup>
                 <a @click="this.$refs['popupref2'].openPopup()"
                    class="c-button c-button__blue cursor-pointer">
-                    Nieuw tarief
+                    Nieuwe regel
                 </a>
             </template>
             <template #popup>
-                <form method="POST" action="{{ route('dashboard.prices.new') }}">
+                <form method="POST" action="{{ route('dashboard.regulations.new') }}">
                     @csrf
-                    <input class="c-form__input-float" type="text" placeholder="Tarief naam" name="name"/>
-                    <input class="c-form__input-float mt-4" type="text" placeholder="Tarief prijs" name="price"/>
+                    <input class="c-form__input-float" type="text" placeholder="Regel" name="name"/>
+                    <editor></editor>
                     <input class="c-button c-button__blue cursor-pointer mt-4" type="submit" value="Opslaan"/>
                 </form>
             </template>
@@ -26,18 +26,18 @@
     </div>
     <div class="overflow-x-auto">
         <table class="mt-4 w-full">
-            @foreach($prices as $price)
-                <tr class="border-b whitespace-nowrap">
-                    <td class="px-4">
-                        {{ $price->id }}
+            @foreach($regulations as $regulation)
+                <tr class="border-b">
+                    <td class="px-4 whitespace-nowrap">
+                        {{ $regulation->id }}
                     </td>
-                    <td class="px-4">
-                        <a class="text-blue-400" href="/dashboard/tarieven/{{ $price->id }}">
-                            {{ $price->name }}
+                    <td class="px-4 whitespace-nowrap">
+                        <a class="text-blue-400" href="/dashboard/reglementen/{{ $regulation->id }}">
+                            {{ $regulation->name }}
                         </a>
                     </td>
-                    <td class="px-4">
-                        {{ $price->price }}
+                    <td class="line-clamp-3 max-w-[100px] flex flex-wrap px-4">
+                        {!! $regulation->description !!}
                     </td>
                     <td class="p-4">
                         <popup
@@ -46,7 +46,7 @@
                         >
                             <template #openpopup>
                                 <div class="mt-4">
-                                    <a @click="this.$refs['popupref'].openPopupDashboard({{ $price->id }})"
+                                    <a @click="this.$refs['popupref'].openPopupDashboard({{ $regulation->id }})"
                                        class="c-button c-button__red cursor-pointer">
                                         Verwijderen
                                     </a>
@@ -54,9 +54,9 @@
                             </template>
                             <template #popup="slotprops">
                                 <div class="text-center">
-                                    <p class="font-bold whitespace-normal">
-                                        Weet u zeker dat u deze prijs wilt verwijderen? Hiermee wordt de
-                                        prijs voorgoed verwijderd.
+                                    <p class="font-bold">
+                                        Weet u zeker dat u deze regel wilt verwijderen? Hiermee wordt de
+                                        regel voorgoed verwijderd.
                                     </p>
                                     <div class="flex md:justify-center items-center flex-col md:flex-row mt-4">
                                         <div>
@@ -65,7 +65,7 @@
                                                 Annuleren
                                             </a>
                                         </div>
-                                        <form method="POST" class="mt-4 md:mt-0" action="{{ route('prices.delete') }}">
+                                        <form method="POST" class="mt-4 md:mt-0" action="{{ route('regulations.delete') }}">
                                             @csrf
                                             <input type="hidden" name="id" v-model="slotprops.id"/>
                                             <input type="submit" value="Verwijderen"

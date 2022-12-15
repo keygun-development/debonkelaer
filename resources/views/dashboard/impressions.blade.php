@@ -2,7 +2,7 @@
 @section('content')
     <div class="flex justify-between flex-wrap">
         <h1>
-            Tarieven
+            Impressies
         </h1>
         <popup
             :width="'md:w-10/12 w-full'"
@@ -11,14 +11,13 @@
             <template #openpopup>
                 <a @click="this.$refs['popupref2'].openPopup()"
                    class="c-button c-button__blue cursor-pointer">
-                    Nieuw tarief
+                    Nieuwe impressie
                 </a>
             </template>
             <template #popup>
-                <form method="POST" action="{{ route('dashboard.prices.new') }}">
+                <form enctype="multipart/form-data" method="POST" action="{{ route('dashboard.impressions.new') }}">
                     @csrf
-                    <input class="c-form__input-float" type="text" placeholder="Tarief naam" name="name"/>
-                    <input class="c-form__input-float mt-4" type="text" placeholder="Tarief prijs" name="price"/>
+                    <input type="file" name="image" accept=".jpg,.jpeg,.png,.webp"/>
                     <input class="c-button c-button__blue cursor-pointer mt-4" type="submit" value="Opslaan"/>
                 </form>
             </template>
@@ -26,18 +25,13 @@
     </div>
     <div class="overflow-x-auto">
         <table class="mt-4 w-full">
-            @foreach($prices as $price)
+            @foreach($impressions as $impression)
                 <tr class="border-b whitespace-nowrap">
                     <td class="px-4">
-                        {{ $price->id }}
+                        {{ $impression->id }}
                     </td>
-                    <td class="px-4">
-                        <a class="text-blue-400" href="/dashboard/tarieven/{{ $price->id }}">
-                            {{ $price->name }}
-                        </a>
-                    </td>
-                    <td class="px-4">
-                        {{ $price->price }}
+                    <td class="h-[100px] w-[100px]">
+                        <img src="{{ asset($impression->image) }}" alt="{{ $impression->image }}"/>
                     </td>
                     <td class="p-4">
                         <popup
@@ -46,7 +40,7 @@
                         >
                             <template #openpopup>
                                 <div class="mt-4">
-                                    <a @click="this.$refs['popupref'].openPopupDashboard({{ $price->id }})"
+                                    <a @click="this.$refs['popupref'].openPopupDashboard({{ $impression->id }})"
                                        class="c-button c-button__red cursor-pointer">
                                         Verwijderen
                                     </a>
@@ -55,8 +49,8 @@
                             <template #popup="slotprops">
                                 <div class="text-center">
                                     <p class="font-bold whitespace-normal">
-                                        Weet u zeker dat u deze prijs wilt verwijderen? Hiermee wordt de
-                                        prijs voorgoed verwijderd.
+                                        Weet u zeker dat u deze foto wilt verwijderen? Hiermee wordt de
+                                        foto voorgoed verwijderd.
                                     </p>
                                     <div class="flex md:justify-center items-center flex-col md:flex-row mt-4">
                                         <div>
@@ -65,7 +59,7 @@
                                                 Annuleren
                                             </a>
                                         </div>
-                                        <form method="POST" class="mt-4 md:mt-0" action="{{ route('prices.delete') }}">
+                                        <form method="POST" class="mt-4 md:mt-0" action="{{ route('impressions.delete') }}">
                                             @csrf
                                             <input type="hidden" name="id" v-model="slotprops.id"/>
                                             <input type="submit" value="Verwijderen"

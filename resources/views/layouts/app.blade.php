@@ -12,9 +12,9 @@
     @notifyJs
     <div id="header">
         @include('partials.navigation')
-        @if(Auth::check())
+        @can('isAdmin')
             @include('partials.authNavigation')
-        @endif
+        @endcan
         @if (isset($header))
             <header class="bg-white shadow">
                 <div class="main-container">

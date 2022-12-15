@@ -6,7 +6,7 @@
                     Reglement
                 </h1>
                 @can('isAdmin')
-                    <a href="/dashboard/reglement" class="c-button c-button__blue">
+                    <a href="/dashboard/reglementen" class="c-button c-button__blue">
                         Reglement aanpassen
                     </a>
                 @endcan
@@ -20,7 +20,7 @@
                         {{ $regulation->name }}
                     </h3>
                     <p class="mt-2">
-                        {{ $regulation->description }}
+                        {!! $regulation->description !!}
                     </p>
                 </div>
             @endforeach

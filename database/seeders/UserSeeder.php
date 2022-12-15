@@ -25,6 +25,7 @@ class UserSeeder extends Seeder
             'role_id' => 1,
             'password' => Hash::make('qweqweqwe'),
             'remember_token' => Str::random(10),
+            'active' => 1
         ]);
         User::factory()->count(10)->create();
     }

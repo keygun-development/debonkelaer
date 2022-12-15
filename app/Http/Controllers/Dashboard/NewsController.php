@@ -3,27 +3,32 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ImageUploadController;
 use App\Models\Post;
-use GdImage;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class NewsController extends Controller
+class NewsController extends Controller implements DashboardInterface
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
         return view('dashboard.news', [
             'posts' => Post::with('author')->get()
         ]);
     }
 
-    public function newPost()
+    public function newPost(): Factory|View|Application
     {
         return view('dashboard.newpost');
     }
 
-    public function slugPage(Request $request)
+    public function detailedPage(Request $request): Factory|View|Application
     {
         return view('dashboard.newsdetail', [
             'post' => Post::where('post_slug', $request->post_slug)
@@ -32,11 +37,12 @@ class NewsController extends Controller
         ]);
     }
 
-    public function create(Request $request) {
+    public function create(Request $request): Redirector|Application|RedirectResponse
+    {
         $post = new Post();
 
         if ($request->image) {
-            $post->post_image = $this->uploadImg($request);
+            $post->post_image = (new ImageUploadController)->uploadImg($request);
         }
         $post->post_title = $request->title;
         $post->post_slug = Str::slug($request->title);
@@ -48,11 +54,11 @@ class NewsController extends Controller
         return redirect('/dashboard/nieuws');
     }
 
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
         $post = Post::where('id', $request->id)->first();
         if ($request->image) {
-            $post->post_image = $this->uploadImg($request);
+            $post->post_image = (new ImageUploadController)->uploadImg($request);
         }
         $post->post_title = $request->title;
         $post->post_content = $request->postcontent;
@@ -62,59 +68,11 @@ class NewsController extends Controller
         return redirect()->back();
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request): RedirectResponse
     {
         $post = Post::where('id', $request->id);
         $post->delete();
         notify()->success('Post verwijderd.');
         return redirect()->back();
-    }
-
-    private function uploadImg($data): ?string
-    {
-        $file = $data->image;
-        if ($file == null) {
-            return null;
-        }
-        $file_ext = $file->getClientOriginalExtension();
-        $destinationPath = "images/";
-        $uuid = Str::uuid()->toString();
-        $file_location = "$destinationPath$uuid.webp";
-        $this->convertImageToWebp($file, $file_ext, $file_location);
-        return $file_location;
-    }
-
-    private function convertImageToWebp($file, $file_extension, $file_location): void
-    {
-        $temp_img = null;
-        switch ($file_extension) {
-            case "jpg":
-            case "jpeg":
-                $temp_img = imagecreatefromjpeg($file);
-                break;
-            case "png":
-                $temp_img = $this->pngToWebp($file);
-                break;
-            case "webp":
-                $temp_img = imagecreatefromwebp($file);
-                break;
-        }
-        imagewebp($temp_img, $file_location, 100);
-    }
-
-    private function pngToWebp($file): GdImage|bool
-    {
-        $pngimg = imagecreatefrompng($file);
-
-        $w = imagesx($pngimg);
-        $h = imagesy($pngimg);
-
-        $image = imagecreatetruecolor($w, $h);
-        imageAlphaBlending($image, false);
-        imageSaveAlpha($image, true);
-        $trans = imagecolorallocatealpha($image, 0, 0, 0, 127);
-        imagefilledrectangle($image, 0, 0, $w - 1, $h - 1, $trans);
-        imagecopy($image, $pngimg, 0, 0, 0, 0, $w, $h);
-        return $image;
     }
 }

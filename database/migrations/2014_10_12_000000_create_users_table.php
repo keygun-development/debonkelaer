@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('role_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('active');
             $table->rememberToken();
             $table->timestamps();
         });

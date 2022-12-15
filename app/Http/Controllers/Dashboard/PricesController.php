@@ -4,25 +4,30 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Price;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
-class PricesController extends Controller
+class PricesController extends Controller implements DashboardInterface
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
         return view('dashboard.prices', [
             'prices' => Price::all()
         ]);
     }
 
-    public function idPage(Request $request)
+    public function detailedPage(Request $request): Factory|View|Application
     {
         return view('dashboard.pricedetail', [
             'price' => Price::where('id', $request->id)->first()
         ]);
     }
 
-    public function create(Request $request)
+    public function create(Request $request): Redirector|Application|RedirectResponse
     {
         $price = new Price();
 
@@ -34,7 +39,7 @@ class PricesController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
         $price = Price::where('id', $request->id)->first();
 
@@ -46,7 +51,7 @@ class PricesController extends Controller
         return redirect()->back();
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request): RedirectResponse
     {
         $price = Price::where('id', $request->id);
         $price->delete();

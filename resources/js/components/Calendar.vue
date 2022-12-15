@@ -7,6 +7,7 @@ import '@fullcalendar/core/vdom'
 import {Calendar} from '@fullcalendar/core';
 import dayGridPlugin from "@fullcalendar/daygrid";
 import listPlugin from "@fullcalendar/list";
+import allLocales from '@fullcalendar/core/locales-all';
 
 export default {
     mounted() {
@@ -15,7 +16,15 @@ export default {
             plugins: [dayGridPlugin, listPlugin],
             initialView: this.layout,
             events: this.events,
+            locales: allLocales,
             locale: 'nl',
+            buttonText: {
+                today:    'Vandaag',
+                month:    'Maand',
+                week:     'Week',
+                day:      'Dag',
+                list:     'Lijst'
+            },
             eventTimeFormat: {
                 hour: '2-digit',
                 minute: '2-digit',
