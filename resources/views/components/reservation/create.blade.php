@@ -42,7 +42,7 @@
                                 id="users2">
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}">
-                                    {{ $user->name }}
+                                    {{ $user->name }} - {{ $user->membership_id }}
                                 </option>
                             @endforeach
                         </select>
@@ -62,7 +62,7 @@
                                 id="users3">
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}">
-                                    {{ $user->name }}
+                                    {{ $user->name }} - {{ $user->membership_id }}
                                 </option>
                             @endforeach
                         </select>
@@ -82,7 +82,7 @@
                                 id="users4">
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}">
-                                    {{ $user->name }}
+                                    {{ $user->name }} - {{ $user->membership_id }}
                                 </option>
                             @endforeach
                         </select>

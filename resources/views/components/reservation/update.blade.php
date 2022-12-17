@@ -47,12 +47,12 @@
                             <option></option>
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}">
-                                    {{ $user->name }}
+                                    {{ $user->name }} - {{ $user->membership_id }}
                                 </option>
                             @endforeach
                             @foreach($reservation->users()->get() as $user)
                                 <option value="{{ $user->id }}">
-                                    {{ $user->name }}
+                                    {{ $user->name }} - {{ $user->membership_id }}
                                 </option>
                             @endforeach
                         </select>
@@ -72,12 +72,12 @@
                             <option></option>
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}">
-                                    {{ $user->name }}
+                                    {{ $user->name }} - {{ $user->membership_id }}
                                 </option>
                             @endforeach
                             @foreach($reservation->users()->get() as $user)
                                 <option value="{{ $user->id }}">
-                                    {{ $user->name }}
+                                    {{ $user->name }} - {{ $user->membership_id }}
                                 </option>
                             @endforeach
                         </select>
@@ -97,12 +97,12 @@
                             <option></option>
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}">
-                                    {{ $user->name }}
+                                    {{ $user->name }} - {{ $user->membership_id }}
                                 </option>
                             @endforeach
                             @foreach($reservation->users()->get() as $user)
                                 <option value="{{ $user->id }}">
-                                    {{ $user->name }}
+                                    {{ $user->name }} - {{ $user->membership_id }}
                                 </option>
                             @endforeach
                         </select>

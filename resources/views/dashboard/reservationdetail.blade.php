@@ -21,12 +21,12 @@
                             <option></option>
                             @foreach($users as $userd)
                                 <option value="{{ $userd->id }}">
-                                    {{ $userd->name }}
+                                    {{ $userd->name }} - {{ $userd->membership_id }}
                                 </option>
                             @endforeach
                             @foreach($reservation->users()->get() as $userd)
                                 <option {{ $user->id === $userd->id ? 'selected' : '' }} value="{{ $userd->id }}">
-                                    {{ $userd->name }}
+                                    {{ $userd->name }} - {{ $userd->membership_id }}
                                 </option>
                             @endforeach
                         </select>
