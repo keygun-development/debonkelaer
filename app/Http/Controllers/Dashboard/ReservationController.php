@@ -51,6 +51,12 @@ class ReservationController extends Controller implements DashboardInterface
 
     public function create(Request $request): Redirector|Application|RedirectResponse
     {
+        $request->validate([
+            'track' => 'required',
+            'date' => 'required|after:yesterday',
+            'timestart' => 'required',
+            'timeend' => 'required|after:timestart'
+        ]);
         $reservation = new Reservation();
 
         $reservation->track = $request->track;

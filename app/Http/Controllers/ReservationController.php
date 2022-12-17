@@ -34,10 +34,12 @@ class ReservationController extends Controller
     public function create(Request $request): RedirectResponse
     {
         $request->validate([
-            'participant1' => 'required',
-            'participant2' => 'required',
+            'participant1' => 'required|distinct',
+            'participant2' => 'required|distinct',
+            'participant3' => 'distinct',
+            'participant4' => 'distinct',
             'date' => 'required|after:yesterday',
-            'time' => 'required',
+            'time' => 'required|after_or_equal:' . Carbon::now()->timezone('Europe/Amsterdam')->toDateTimeString(),
             'track' => 'required'
         ]);
 
@@ -72,6 +74,15 @@ class ReservationController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'participant1' => 'required|distinct',
+            'participant2' => 'required|distinct',
+            'participant3' => 'distinct',
+            'participant4' => 'distinct',
+            'date' => 'required|after:yesterday',
+            'time' => 'required|after_or_equal:' . Carbon::now()->timezone('Europe/Amsterdam')->toDateTimeString(),
+            'track' => 'required'
+        ]);
         $reservation = Reservation::where('id', $request->id)->first();
         $reservation->date = Carbon::parse($request->date)->format('Y-m-d');
         $reservation->time = $request->time;

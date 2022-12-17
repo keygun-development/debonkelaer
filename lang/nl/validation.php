@@ -16,8 +16,8 @@ return [
     'accepted' => 'The :attribute must be accepted.',
     'accepted_if' => 'The :attribute must be accepted when :other is :value.',
     'active_url' => 'The :attribute is not a valid URL.',
-    'after' => 'The :attribute must be a date after :date.',
-    'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
+    'after' => 'De :attribute moet een datum na :date zijn.',
+    'after_or_equal' => 'De :attribute moet een datum na of gelijk aan :date zijn.',
     'alpha' => 'The :attribute must only contain letters.',
     'alpha_dash' => 'The :attribute must only contain letters, numbers, dashes and underscores.',
     'alpha_num' => 'The :attribute must only contain letters and numbers.',
@@ -118,7 +118,7 @@ return [
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
     'prohibits' => 'The :attribute field prohibits :other from being present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => 'Het :attribute veld is verplicht.',
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_if_accepted' => 'The :attribute field is required when :other is accepted.',
@@ -171,6 +171,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'timestart' => 'Starttijd',
+        'timeend' => 'Eindtijd',
+        'track' => 'Baan',
+        'date' => 'Datum',
+        'time' => 'Tijd'
+    ],
 
 ];
