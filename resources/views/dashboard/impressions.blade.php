@@ -24,6 +24,17 @@
         </popup>
     </div>
     <div class="overflow-x-auto">
+        <div class="mt-4">
+            @if($errors->any())
+                <div class="text-red-500">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
         <table class="mt-4 w-full">
             @foreach($impressions as $impression)
                 <tr class="border-b whitespace-nowrap">

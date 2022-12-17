@@ -30,6 +30,12 @@ class UserController extends Controller implements DashboardInterface
 
     public function create(Request $request): Redirector|Application|RedirectResponse
     {
+        $request->validate([
+            'name' => 'required',
+            'password' => 'required',
+            'email' => 'required|unique:users',
+            'membership_id' => 'required|unique:users'
+        ]);
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -49,6 +55,10 @@ class UserController extends Controller implements DashboardInterface
         $user->email = $request->email;
         $user->membership_id = $request->membership_id;
         $user->role_id = $request->role_id;
+        $request->validate([
+            'email' => 'required|unique:users,email,'.$user->id,
+            'membership_id' => 'unique:users,membership_id,'.$user->id
+        ]);
         $user->save();
         notify()->success('Gebruiker aangepast.');
         return redirect()->back();

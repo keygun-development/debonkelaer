@@ -39,7 +39,16 @@ class ReservationController extends Controller
             'participant3' => 'distinct',
             'participant4' => 'distinct',
             'date' => 'required|after:yesterday',
-            'time' => 'required|after_or_equal:' . Carbon::now()->timezone('Europe/Amsterdam')->toDateTimeString(),
+            'time' => [
+                'required',
+                'date_format:H:i',
+                function ($attribute, $value, $fail) use ($request) {
+                    $date = $request->date;
+                    if ($date == Carbon::now()->format('Y-m-d') && $value < Carbon::now()->format('H:i')) {
+                        $fail('De tijd moet na de huidige tijd liggen als de datum vandaag is.');
+                    }
+                },
+            ],
             'track' => 'required'
         ]);
 
@@ -80,7 +89,16 @@ class ReservationController extends Controller
             'participant3' => 'distinct',
             'participant4' => 'distinct',
             'date' => 'required|after:yesterday',
-            'time' => 'required|after_or_equal:' . Carbon::now()->timezone('Europe/Amsterdam')->toDateTimeString(),
+            'time' => [
+                'required',
+                'date_format:H:i',
+                function ($attribute, $value, $fail) use ($request) {
+                    $date = $request->date;
+                    if ($date == Carbon::now()->format('Y-m-d') && $value < Carbon::now()->format('H:i')) {
+                        $fail('De tijd moet na de huidige tijd liggen als de datum vandaag is.');
+                    }
+                },
+            ],
             'track' => 'required'
         ]);
         $reservation = Reservation::where('id', $request->id)->first();
@@ -135,7 +153,7 @@ class ReservationController extends Controller
 
         foreach ($reservations as $reservation) {
             if ($reservation->endtime) {
-                foreach($this->removeRoundHours($allTimes, $reservation->time, $reservation->endtime) as $key => $hour) {
+                foreach ($this->removeRoundHours($allTimes, $reservation->time, $reservation->endtime) as $key => $hour) {
                     unset($allTimes[$key]);
                 }
             }
@@ -149,7 +167,7 @@ class ReservationController extends Controller
 
     public function removeRoundHours($hours, $starthour, $endhour): array
     {
-        return array_filter($hours, function($hour) use ($starthour, $endhour) {
+        return array_filter($hours, function ($hour) use ($starthour, $endhour) {
             return $hour >= $starthour && $hour < $endhour;
         });
     }

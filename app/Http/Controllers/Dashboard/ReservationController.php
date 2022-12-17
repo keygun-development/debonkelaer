@@ -71,6 +71,15 @@ class ReservationController extends Controller implements DashboardInterface
 
     public function update(Request $request): RedirectResponse
     {
+        $request->validate([
+            'track' => 'required',
+            'date' => 'required|after:yesterday',
+            'time' => 'required',
+            'participant1' => 'required|distinct',
+            'participant2' => 'required|distinct',
+            'participant3' => 'distinct',
+            'participant4' => 'distinct',
+        ]);
         $reservation = Reservation::where('id', $request->id)->first();
         $reservation->date = Carbon::parse($request->date)->format('Y-m-d');
         $reservation->time = $request->time;

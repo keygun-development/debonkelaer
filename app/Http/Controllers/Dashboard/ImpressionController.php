@@ -28,6 +28,9 @@ class ImpressionController extends Controller implements DashboardInterface
 
     public function create(Request $request): Redirector|Application|RedirectResponse
     {
+        $request->validate([
+            'image' => 'required',
+        ]);
         $impression = new Impression();
         $impression->image = (new ImageUploadController)->uploadImg($request);
         $impression->save();

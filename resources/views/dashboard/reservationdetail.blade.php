@@ -90,5 +90,16 @@
         <input type="submit" value="Opslaan"
                class="c-button c-button__blue cursor-pointer mt-4"
         />
+        <div class="mt-4">
+            @if($errors->any())
+                <div class="text-red-500">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
     </form>
 @endsection

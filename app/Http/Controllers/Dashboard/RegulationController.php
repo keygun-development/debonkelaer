@@ -22,6 +22,9 @@ class RegulationController extends Controller implements DashboardInterface
 
     public function create(Request $request): Redirector|Application|RedirectResponse
     {
+        $request->validate([
+            'name' => 'required',
+        ]);
         $regulation = new Regulation();
 
         $regulation->name = $request->name;
@@ -49,6 +52,9 @@ class RegulationController extends Controller implements DashboardInterface
 
     public function update(Request $request): RedirectResponse
     {
+        $request->validate([
+            'name' => 'required',
+        ]);
         $regulation = Regulation::where('id', $request->id)->first();
         $regulation->name = $request->name;
         $regulation->description = $request->postcontent;

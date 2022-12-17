@@ -29,6 +29,9 @@ class PricesController extends Controller implements DashboardInterface
 
     public function create(Request $request): Redirector|Application|RedirectResponse
     {
+        $request->validate([
+            'name' => 'required',
+        ]);
         $price = new Price();
 
         $price->name = $request->name;
@@ -41,6 +44,9 @@ class PricesController extends Controller implements DashboardInterface
 
     public function update(Request $request): RedirectResponse
     {
+        $request->validate([
+            'name' => 'required',
+        ]);
         $price = Price::where('id', $request->id)->first();
 
         $price->name = $request->name;
