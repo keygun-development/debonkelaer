@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\TimeTrait;
+use App\Mail\Removed;
+use App\Mail\ReservationMail;
+use App\Mail\Update;
 use App\Models\Reservation;
 use App\Models\User;
 use Carbon\Carbon;
@@ -13,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -20,6 +24,10 @@ class ReservationController extends Controller
 
     public function index(): Factory|View|Application
     {
+        Reservation::where('date', '<', now()->toDateString())->delete();
+        Reservation::where('time', '<', now()->toTimeString())
+            ->where('date', now()->toDateString())
+            ->delete();
         return view('reservation', [
             'reservations' => Reservation::has('users')->with('users')->get(),
             'myReservation' => User::where('id', Auth::id())
@@ -68,6 +76,18 @@ class ReservationController extends Controller
             ->get();
 
         $reservation->users()->attach($users);
+
+        foreach($reservation->users()->get() as $user) {
+            $data = [
+                'date' => $reservation->date,
+                'time' => $reservation->time,
+                'track' => $reservation->track,
+                'name' => $user->name
+            ];
+
+            Mail::to($user->email)
+                ->send(new ReservationMail($data));
+        }
         notify()->success('Reservering aangemaakt!');
         return redirect()->back();
     }
@@ -76,6 +96,19 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::find($request->reservation);
         $reservation->delete();
+
+        foreach($reservation->users()->get() as $user) {
+            $data = [
+                'date' => $reservation->date,
+                'time' => $reservation->time,
+                'track' => $reservation->track,
+                'name' => $user->name
+            ];
+
+            Mail::to($user->email)
+                ->send(new Removed($data));
+        }
+
         $reservation->users()->detach();
         notify()->success('Reservering verwijderd.');
         return redirect()->back();
@@ -117,6 +150,18 @@ class ReservationController extends Controller
             ->get();
 
         $reservation->users()->sync($users);
+
+        foreach($reservation->users()->get() as $user) {
+            $data = [
+                'date' => $reservation->date,
+                'time' => $reservation->time,
+                'track' => $reservation->track,
+                'name' => $user->name
+            ];
+
+            Mail::to($user->email)
+                ->send(new Update($data));
+        }
         notify()->success('Reservering geupdated!');
         return redirect()->back();
     }

@@ -16,6 +16,9 @@
                     <x-latest-news :post="$post"/>
                 @endforeach
             </div>
+            <div class="mt-4">
+                {!! $posts->links() !!}
+            </div>
         </div>
     @endsection
 </x-app-layout>

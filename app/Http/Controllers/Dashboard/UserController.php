@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Activate;
+use App\Mail\Deactivate;
+use App\Mail\Welcome;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -11,6 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller implements DashboardInterface
 {
@@ -44,6 +48,16 @@ class UserController extends Controller implements DashboardInterface
         $user->password = Hash::make($request->password);
         $user->active = 1;
         $user->save();
+
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+
+        Mail::to($request->email)
+            ->send(new Welcome($data));
+
         notify()->success('Gebruiker aangemaakt.');
         return redirect()->back();
     }
@@ -69,6 +83,14 @@ class UserController extends Controller implements DashboardInterface
         $user = User::where('id', $request->id)->first();
         $user->active = 0;
         $user->save();
+
+        $data = [
+            'name' => $user->name,
+            'email' => $user->email
+        ];
+        Mail::to($user->email)
+            ->send(new Deactivate($data));
+
         notify()->success('Gebruiker is niet meer actief.');
         return redirect()->back();
     }
@@ -78,6 +100,15 @@ class UserController extends Controller implements DashboardInterface
         $user = User::where('id', $request->id)->first();
         $user->active = 1;
         $user->save();
+
+        $data = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $user->password
+        ];
+        Mail::to($user->email)
+            ->send(new Activate($data));
+
         notify()->success('Gebruiker is weer actief.');
         return redirect()->back();
     }

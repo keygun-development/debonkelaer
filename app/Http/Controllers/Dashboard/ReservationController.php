@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\TimeTrait;
+use App\Mail\Overwrite;
+use App\Mail\Removed;
+use App\Mail\ReservationMail;
+use App\Mail\Update;
 use App\Models\Reservation;
 use App\Models\User;
 use Carbon\Carbon;
@@ -13,6 +17,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller implements DashboardInterface
 {
@@ -44,6 +49,18 @@ class ReservationController extends Controller implements DashboardInterface
         $reservation = Reservation::find($request->id);
         $reservation->delete();
 
+        foreach($reservation->users()->get() as $user) {
+            $data = [
+                'date' => $reservation->date,
+                'time' => $reservation->time,
+                'track' => $reservation->track,
+                'name' => $user->name
+            ];
+
+            Mail::to($user->email)
+                ->send(new Removed($data));
+        }
+
         $reservation->users()->detach();
         notify()->success('Reservering verwijderd.');
         return redirect()->back();
@@ -57,6 +74,13 @@ class ReservationController extends Controller implements DashboardInterface
             'timestart' => 'required',
             'timeend' => 'required|after:timestart'
         ]);
+        $reservationsBetween = Reservation::where('track', $request->track)
+            ->where('date', $request->date)
+            ->whereBetween('time', [
+                $request->timestart, $request->timeend
+            ])
+            ->get();
+
         $reservation = new Reservation();
 
         $reservation->track = $request->track;
@@ -65,6 +89,19 @@ class ReservationController extends Controller implements DashboardInterface
         $reservation->endtime = $request->timeend;
 
         $reservation->save();
+        foreach($reservationsBetween as $reservationBetween) {
+            foreach($reservationBetween->users()->get() as $user) {
+                $data = [
+                    'date' => $reservation->date,
+                    'time' => $reservation->time,
+                    'track' => $reservation->track,
+                    'name' => $user->name
+                ];
+
+                Mail::to($user->email)
+                    ->send(new Overwrite($data));
+            }
+        }
         notify()->success('Baan afgeschermd.');
         return redirect()->back();
     }
@@ -95,6 +132,19 @@ class ReservationController extends Controller implements DashboardInterface
         ])
             ->get();
         $reservation->users()->sync($users);
+
+        foreach($reservation->users()->get() as $user) {
+            $data = [
+                'date' => $reservation->date,
+                'time' => $reservation->time,
+                'track' => $reservation->track,
+                'name' => $user->name
+            ];
+
+            Mail::to($user->email)
+                ->send(new Update($data));
+        }
+
         notify()->success('Reservering geupdated!');
         return redirect()->back();
     }
