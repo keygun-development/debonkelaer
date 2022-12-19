@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@section('pageTitle', 'Reglementen')
 @section('content')
     <div class="flex justify-between flex-wrap">
         <h1>

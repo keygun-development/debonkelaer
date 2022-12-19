@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('pageTitle')</title>
-    {{--    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">--}}
+    <title>@yield('pageTitle') (Dashboard) - De Bonkelaer</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
 </head>
 <body>
 <div class="relative max-h-screen min-h-screen md:overflow-hidden">

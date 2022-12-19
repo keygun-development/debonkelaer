@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@section('pageTitle', 'Tarief details')
 @section('content')
     <form method="POST" action="{{ route('dashboard.prices.update') }}">
         @csrf

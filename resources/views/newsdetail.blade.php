@@ -1,4 +1,5 @@
 <x-app-layout>
+    @section('pageTitle', 'Nieuws detail')
     @section('content')
         <div class="main-container">
             <div class="flex md:w-10/12 w-full flex-col border-b">

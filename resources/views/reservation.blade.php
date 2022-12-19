@@ -1,4 +1,5 @@
 <x-app-layout>
+    @section('pageTitle', 'Reserveren')
     @section('content')
         <div class="main-container">
             <h1 class="font-bold">

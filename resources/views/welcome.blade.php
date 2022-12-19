@@ -1,4 +1,5 @@
 <x-app-layout>
+    @section('pageTitle', 'Home')
     @section('content')
         <div class="main-container">
             <div class="w-full md:flex justify-between">

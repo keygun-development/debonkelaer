@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@section('pageTitle', 'Reglement details')
 @section('content')
     <form method="POST" action="{{ route('dashboard.regulations.update') }}">
         @csrf

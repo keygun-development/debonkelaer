@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@section('pageTitle', 'Reservering details')
 @section('content')
     <p class="font-bold">
         Let op: Via het dashboard wordt er niet gecontroleerd of er op het geselecteerde moment al wordt gespeeld! (Je

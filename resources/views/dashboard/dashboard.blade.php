@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@section('pageTitle', 'Dashboard')
 @section('content')
     <h1>
         Dashboard

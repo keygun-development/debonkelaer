@@ -1,4 +1,5 @@
 <x-app-layout>
+    @section('pageTitle', 'Impressies')
     @section('content')
         <div class="main-container">
             <div class="flex justify-between flex-wrap">

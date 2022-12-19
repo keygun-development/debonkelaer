@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@section('pageTitle', 'Gebruiker details')
 @section('content')
     <form class="mt-4" method="POST" action="{{ route('dashboard.users.update') }}">
         @csrf

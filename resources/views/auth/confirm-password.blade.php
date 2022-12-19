@@ -1,4 +1,5 @@
 <x-guest-layout>
+    @section('pageTitle', 'Wachtwoord confirm')
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">

@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('pageTitle')</title>
+    <title>@yield('pageTitle') - De Bonkelaer</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
 </head>
 <body>
 <div class="font-sans text-gray-900 antialiased" id="app">

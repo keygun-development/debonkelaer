@@ -1,4 +1,5 @@
 @extends('layouts.dashboard')
+@section('pageTitle', 'Nieuwe post')
 @section('content')
     <form enctype="multipart/form-data" method="POST" action="{{ route('dashboard.news.new') }}">
         @csrf
