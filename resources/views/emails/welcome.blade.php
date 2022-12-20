@@ -12,5 +12,5 @@ Gebruik de volgende gegevens om in te loggen:
 Log in
 </x-mail::button>
 Met Vriendelijke Groet,<br>
-De bonkelaer
+TC Lievelde
 </x-mail::message>

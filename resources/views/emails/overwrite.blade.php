@@ -12,5 +12,5 @@ Dit zijn de gegevens van de reservering:
 Wij verzoeken u om uw reservering aan te passen naar een andere beschikbare tijd.
 
 Met Vriendelijke Groet,<br>
-De bonkelaer
+TC Lievelde
 </x-mail::message>

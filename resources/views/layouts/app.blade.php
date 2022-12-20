@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('pageTitle') - De Bonkelaer</title>
+    <title>@yield('pageTitle') - TC Lievelde</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
 </head>
 <body>

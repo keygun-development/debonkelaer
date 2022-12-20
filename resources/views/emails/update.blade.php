@@ -11,5 +11,5 @@ Dit zijn de gegevens van de reservering:
 </x-mail::panel>
 
 Met Vriendelijke Groet,<br>
-De bonkelaer
+TC Lievelde
 </x-mail::message>

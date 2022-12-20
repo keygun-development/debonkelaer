@@ -15,5 +15,5 @@ Nieuwe reservering
 </x-mail::button>
 
 Met Vriendelijke Groet,<br>
-De bonkelaer
+TC Lievelde
 </x-mail::message>
