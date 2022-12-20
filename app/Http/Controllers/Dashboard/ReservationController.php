@@ -39,7 +39,9 @@ class ReservationController extends Controller implements DashboardInterface
             'reservation' => Reservation::where('id', $request->id)
                 ->with('users')
                 ->first(),
-            'users' => User::whereDoesntHave('reservation')->get(),
+            'users' => User::whereDoesntHave('reservation')
+                ->where('active', 1)
+                ->get(),
             'times' => $this->timeSlots()
         ]);
     }

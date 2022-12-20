@@ -34,7 +34,9 @@ class ReservationController extends Controller
                 ->has('reservation')
                 ->with('reservation')
                 ->first(),
-            'users' => User::whereDoesntHave('reservation')->get(),
+            'users' => User::whereDoesntHave('reservation')
+                ->where('active', 1)
+                ->get(),
             'times' => $this->timeSlots()
         ]);
     }
