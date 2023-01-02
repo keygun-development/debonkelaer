@@ -40,7 +40,7 @@ class NewsController extends Controller implements DashboardInterface
     public function create(Request $request): Redirector|Application|RedirectResponse
     {
         $request->validate([
-            'post_title' => 'required',
+            'title' => 'required',
         ]);
         $post = new Post();
 
@@ -60,7 +60,7 @@ class NewsController extends Controller implements DashboardInterface
     public function update(Request $request): RedirectResponse
     {
         $request->validate([
-            'post_title' => 'required',
+            'title' => 'required',
         ]);
         $post = Post::where('id', $request->id)->first();
         if ($request->image) {
