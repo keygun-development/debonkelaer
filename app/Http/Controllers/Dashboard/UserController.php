@@ -21,7 +21,8 @@ class UserController extends Controller implements DashboardInterface
     public function index(): Factory|View|Application
     {
         return view('dashboard.users', [
-            'users' => User::all()
+            'users' => User::orderBy('membership_id', 'ASC')
+                ->get()
         ]);
     }
 

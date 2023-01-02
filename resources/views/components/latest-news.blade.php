@@ -7,7 +7,7 @@
       {{ $post->post_title }}
     </h3>
     <div class="c-article__content">
-      {!! $post->post_content !!}
+      {!! strip_tags($post->post_content) !!}
     </div>
   </div>
 </a>

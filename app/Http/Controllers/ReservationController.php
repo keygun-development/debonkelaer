@@ -36,6 +36,7 @@ class ReservationController extends Controller
                 ->first(),
             'users' => User::whereDoesntHave('reservation')
                 ->where('active', 1)
+                ->orderBy('membership_id', 'ASC')
                 ->get(),
             'times' => $this->timeSlots()
         ]);
