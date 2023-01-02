@@ -30,6 +30,9 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request)
     {
         $user = User::where('email', $request->email)->first();
+        if(!$user) {
+            return redirect()->back()->with('error', 'Er is geen gebruiker gevonden met dit emailadres.');
+        }
         if($user->active) {
             $request->authenticate();
 

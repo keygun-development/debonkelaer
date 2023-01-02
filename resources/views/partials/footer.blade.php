@@ -15,12 +15,12 @@
             <div class="flex flex-col md:flex-row md:justify-between mt-4">
                 <div class="md:w-3/12">
                     <p>
-                        Adres tennispark: Tennispark De Bonkelaer Lievelderweg 120 A 7137NB Lievelde
+                        Adres tennispark: Tennispark T.C. Lievelde Lievelderweg 120 A 7137NB Lievelde
                     </p>
                 </div>
                 <div class="md:w-3/12 my-4 md:my-0">
                     <p>
-                        Secretariaat eigenaar tennispark: Stichting De Bonkelaer P/a De Wijn 6 7137MG Lievelde
+                        Secretariaat eigenaar tennispark: Stichting T.C. Lievelde P/a De Wijn 6 7137MG Lievelde
                     </p>
                 </div>
                 <div class="md:w-3/12">

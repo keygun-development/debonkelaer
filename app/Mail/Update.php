@@ -37,6 +37,6 @@ class Update extends Mailable
                 'data' => $this->data,
                 'reserve' => url('/reserveren')
             ])
-            ->subject('Reservering aangepast De Bonkelaer');
+            ->subject('Reservering aangepast T.C. Lievelde');
     }
 }

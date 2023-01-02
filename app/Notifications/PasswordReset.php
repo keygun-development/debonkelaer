@@ -44,7 +44,7 @@ class PasswordReset extends Notification
             ->greeting('Herstel wachtwoord')
             ->line('Iemand hopelijk u heeft een wachtwoord reset aangevraagd. Klik op de knop hieronder om uw wachtwoord te herstellen.')
             ->action('Wachtwoord herstellen', url('/reset-password', $this->token))
-            ->salutation("De bonkelaer");
+            ->salutation("T.C. Lievelde");
     }
 
     /**

@@ -37,6 +37,6 @@ class Removed extends Mailable
                 'data' => $this->data,
                 'reserve' => url('/reserveren')
             ])
-            ->subject('Reservering verwijderd De Bonkelaer');
+            ->subject('Reservering verwijderd T.C. Lievelde');
     }
 }

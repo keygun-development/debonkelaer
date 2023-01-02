@@ -13,7 +13,7 @@
                 @endcan
             </div>
             <p class="mt-4">
-                T.C. Lievelde Baanreglement tennispark “De Bonkelaer”
+                T.C. Lievelde Baanreglement
             </p>
             @foreach($regulations as $regulation)
                 <div class="my-4">

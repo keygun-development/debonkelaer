@@ -35,6 +35,6 @@ class Welcome extends Mailable
                 'login' => url('/inloggen'),
                 'password' => url('/forgot-password')
             ])
-            ->subject('Welkom bij De Bonkelaer');
+            ->subject('Welkom bij T.C. Lievelde');
     }
 }

@@ -38,6 +38,6 @@ class Activate extends Mailable
                 'login' => url('/inloggen'),
                 'password' => url('/forgot-password')
             ])
-            ->subject('Account geactiveerd De Bonkelaer');
+            ->subject('Account geactiveerd T.C. Lievelde');
     }
 }

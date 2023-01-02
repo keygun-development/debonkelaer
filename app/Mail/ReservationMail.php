@@ -36,6 +36,6 @@ class ReservationMail extends Mailable
             ->with([
                 'data' => $this->data
             ])
-            ->subject('Reservering aangemaakt De Bonkelaer');
+            ->subject('Reservering aangemaakt T.C. Lievelde');
     }
 }

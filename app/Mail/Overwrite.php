@@ -36,6 +36,6 @@ class Overwrite extends Mailable
             ->with([
                 'data' => $this->data
             ])
-            ->subject('Reservering overschreven De Bonkelaer');
+            ->subject('Reservering overschreven T.C. Lievelde');
     }
 }

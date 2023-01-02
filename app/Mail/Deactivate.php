@@ -36,6 +36,6 @@ class Deactivate extends Mailable
             ->with([
                 'data' => $this->data
             ])
-            ->subject('Account gedeactiveerd De Bonkelaer');
+            ->subject('Account gedeactiveerd T.C. Lievelde');
     }
 }

@@ -37,7 +37,7 @@ return [
         'smtp' => [
             'transport' => 'smtp',
             'host' => env('MAIL_HOST', 'smtp.gmail.com'),
-            'from' => ['address' => env('MAIL_USERNAME'), 'name' => 'De bonkelaer'],
+            'from' => ['address' => env('MAIL_USERNAME'), 'name' => 'T.C. Lievelde'],
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
