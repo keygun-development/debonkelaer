@@ -180,6 +180,7 @@ return [
         'membership_id' => 'Lidnummer',
         'name' => 'Naam',
         'password' => 'Wachtwoord',
+        'form' => 'formulier'
     ],
 
 ];

@@ -9,6 +9,17 @@ class PricesController extends Controller
 {
     public function index()
     {
-        return view('prices', ['prices' => Price::all()]);
+        $file_path = 'storage/downloads/Inschrijfformulier_TClievelde.doc';
+
+        if (file_exists(public_path($file_path))) {
+            $file = asset($file_path);
+        } else {
+            $file = asset('storage/downloads/Inschrijfformulier_TClievelde.pdf');
+        }
+
+        return view('prices', [
+            'prices' => Price::all(),
+            'file' => $file
+        ]);
     }
 }

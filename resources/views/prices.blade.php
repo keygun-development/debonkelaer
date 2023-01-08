@@ -42,7 +42,7 @@
                     <div class="mt-4">
                         <a class="c-button c-button__blue"
                            download
-                           href="{{ asset('downloads/Inschrijfformulier_TClievelde2021.docx') }}">
+                           href="{{ $file }}">
                             Downloaden
                         </a>
                     </div>

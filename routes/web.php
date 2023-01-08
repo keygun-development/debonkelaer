@@ -84,6 +84,8 @@ Route::middleware(Admin::class)->group(function () {
     Route::post('/impressies/delete', [DashboardImpressionController::class, 'delete'])->name('impressions.delete');
     Route::post('/gebruikers/delete', [DashboardUserController::class, 'delete'])->name('users.deactivate');
     Route::post('/gebruikers/activate', [DashboardUserController::class, 'activate'])->name('users.activate');
+
+    Route::post('/registrationform/upload', [DashboardHomeController::class, 'upload'])->name('registrationform.upload');
 });
 
 require __DIR__.'/auth.php';
