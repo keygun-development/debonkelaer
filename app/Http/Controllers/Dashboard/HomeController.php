@@ -18,7 +18,7 @@ class HomeController extends Controller
         $request->validate([
             'form' => 'required'
         ]);
-        $files = glob(storage_path('app/public/downloads/*'));
+        $files = glob(public_path('downloads/*'));
 
         foreach ($files as $file) {
             if (is_file($file)) {
@@ -27,7 +27,7 @@ class HomeController extends Controller
         }
 
         $file = $request->file('form');
-        $file->storeAs('public/downloads', 'Inschrijfformulier_TClievelde.'.$file->getClientOriginalExtension());
+        $file->move(public_path('downloads'), $file->getClientOriginalName());
 
         return redirect()->back()->with('success', 'Nieuwe inschrijfformulier is succesvol toegevoegd!');
     }

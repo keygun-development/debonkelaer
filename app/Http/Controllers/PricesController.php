@@ -9,12 +9,10 @@ class PricesController extends Controller
 {
     public function index()
     {
-        $file_path = 'storage/downloads/Inschrijfformulier_TClievelde.doc';
+        $files = glob(public_path('downloads/*'));
 
-        if (file_exists(public_path($file_path))) {
-            $file = asset($file_path);
-        } else {
-            $file = asset('storage/downloads/Inschrijfformulier_TClievelde.pdf');
+        if (file_exists($files[0])) {
+            $file = asset('downloads/'.basename($files[0]));
         }
 
         return view('prices', [
