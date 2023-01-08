@@ -12,8 +12,8 @@
         @swiper="onSwiper"
         @slideChange="onSlideChange"
     >
-        <swiper-slide v-for="slide in slides">
-            <img :src="slide.image" :alt="slide.image" />
+        <swiper-slide class="flex" v-for="slide in slides">
+            <img class="grow shrink aspect-[3/2] object-cover" :src="slide.image" :alt="slide.image" />
         </swiper-slide>
     </swiper>
 </template>
