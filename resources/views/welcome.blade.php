@@ -15,18 +15,17 @@
                         @endif
                     </div>
                     <p class="lg:leading-7 text-justify my-4">
-                        Stichting T.C. Lievelde is eigenaar van Tennispark T.C. Lievelde te Lievelde. Het tennispark kent
-                        momenteel twee
-                        all-weather kunstgrastennisbanen waarop het gehele jaar te tennissen valt. De banen zijn tevens
-                        voorzien van
-                        verlichting. Stichting T.C. Lievelde heeft met Tennisclub Lievelde een overeenkomst gesloten tot
-                        het
-                        gelegenheid geven tot beoefening van de tennissport op Tennispark T.C. Lievelde. Aan Tennisclub
-                        Lievelde is
-                        door Stichting T.C. Lievelde tevens in bruikleen gegeven het online-reserveringssysteem. Leden
-                        van de
-                        tennisvereniging kunnen via een online systeem een tennisbaan reserveren op Tennispark T.C. Lievelde.
-                        Tennisvereniging Lievelde biedt haar leden tevens de mogelijkheid tot het nemen van
+                        Stichting “de Bonkelaer” is eigenaar van het tennispark “de Bonkelaer”
+                        te Lievelde. Het tennispark kent momenteel twee all-weather
+                        kunstgrastennisbanen waarop het gehele jaar te tennissen valt. De
+                        banen zijn tevens voorzien van verlichting. Stichting “de Bonkelaer”
+                        heeft met Tennisclub Lievelde een overeenkomst gesloten tot het
+                        gelegenheid geven tot beoefening van de tennissport op het gehele
+                        tennispark. Aan Tennisclub Lievelde is door de Stichting tevens in
+                        bruikleen gegeven het online-reserveringssysteem. Leden van de
+                        tennisvereniging kunnen via een online systeem een tennisbaan
+                        reserveren op het tennispark “de Bonkelaer”. Tennisvereniging Lievelde
+                        biedt haar leden tevens de mogelijkheid tot het nemen van
                         tennislessen.
                     </p>
                 </div>
