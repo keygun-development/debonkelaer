@@ -42,7 +42,7 @@ class PasswordReset extends Notification
         return (new MailMessage)
             ->subject('Wachtwoord herstellen')
             ->greeting('Herstel wachtwoord')
-            ->line('Iemand hopelijk u heeft een wachtwoord reset aangevraagd. Klik op de knop hieronder om uw wachtwoord te herstellen.')
+            ->line('Iemand, hopelijk u heeft een wachtwoord reset aangevraagd. Klik op de knop hieronder om uw wachtwoord te herstellen.')
             ->action('Wachtwoord herstellen', url('/reset-password', $this->token))
             ->salutation("T.C. Lievelde");
     }
