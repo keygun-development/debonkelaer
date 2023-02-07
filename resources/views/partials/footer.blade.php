@@ -27,29 +27,35 @@
                     <p>
                         Secretariaat gebruiker tennispark: Tennisclub Lievelde P/a Martin Rots
                     </p>
-                    <p>
+                    <p class="mt-2">
                         Adres: Lauwersdijk 12 7137ME Lievelde
                     </p>
-                    <p>
+                    <p class="mt-2">
                         Telefoon: <a href="tel:06-46377955">06-46377955</a>
+                    </p>
+                    <p class="mt-2">
+                        Email: <a href="mailto:Martin@tclievelde.nl">Martin@tclievelde.nl</a>
                     </p>
                 </div>
                 <div class="md:w-3/12">
                     <p>
                         Secretariaat Stichting de Bonkelaer: p/a Kees Weenink
                     </p>
-                    <p>
+                    <p class="mt-2">
                         Telefoon: <a href="tel:06-12173074">06-12173074</a>
+                    </p>
+                    <p class="mt-2">
+                        Email: <a href="mailto:Kees@tclievelde.nl">Kees@tclievelde.nl</a>
                     </p>
                 </div>
                 <div class="md:w-3/12">
                     <p>
                         Parkbeheerder Clemens Leemreize
                     </p>
-                    <p>
+                    <p class="mt-2">
                         Telefoon: <a href="tel:06-13185973">06-13185973</a>
                     </p>
-                    <p>
+                    <p class="mt-2">
                         Email: <a href="mailto:parkbeheer@tclievelde.nl">parkbeheer@tclievelde.nl</a>
                     </p>
                 </div>
