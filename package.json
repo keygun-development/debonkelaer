@@ -22,7 +22,7 @@
         "@fortawesome/free-regular-svg-icons": "^6.2.0",
         "@fortawesome/free-solid-svg-icons": "^6.2.0",
         "@fullcalendar/core": "^5.11.3",
-        "@fullcalendar/daygrid": "^5.11.3",
+        "@fullcalendar/daygrid": "^5.11.5",
         "@fullcalendar/list": "^5.11.3",
         "@tailwindcss/line-clamp": "^0.4.2",
         "@tinymce/tinymce-vue": "^5.0.0",
