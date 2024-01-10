@@ -1,0 +1,15 @@
+name: Run Tests and Linter
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: flowcheck install dependencies & run code checkers
+        uses: keygun-development/FlowCheck@v2.0.3
