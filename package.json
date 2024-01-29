@@ -21,7 +21,7 @@
         "@fortawesome/free-brands-svg-icons": "^6.2.0",
         "@fortawesome/free-regular-svg-icons": "^6.5.1",
         "@fortawesome/free-solid-svg-icons": "^6.5.1",
-        "@fullcalendar/core": "^5.11.3",
+        "@fullcalendar/core": "^6.1.10",
         "@fullcalendar/daygrid": "^5.11.5",
         "@fullcalendar/list": "^5.11.3",
         "@tailwindcss/line-clamp": "^0.4.4",
