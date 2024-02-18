@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="relative max-h-screen min-h-screen md:overflow-hidden">
-    <x:notify-messages/>
+    @include('notify::components.notify')
     @notifyJs
     <div id="header">
         @if(Auth::check())

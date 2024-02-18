@@ -34,8 +34,9 @@ Route::get('/nieuws/{post_slug}', [NewsController::class, 'slugPage'])->name('ne
 Route::get('/tarieven', [PricesController::class, 'index'])->name('prices');
 Route::get('/reglement', [RegulationController::class, 'index'])->name('regulations');
 Route::get('/impressies', [ImpressionController::class, 'index'])->name('impressions');
+Route::get('/phpinfo', fn () => phpinfo());
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function (): void {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -45,7 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/reserveren/change', [ReservationController::class, 'update'])->name('reservation.change');
 });
 
-Route::middleware(Admin::class)->group(function () {
+Route::middleware(Admin::class)->group(function (): void {
     Route::get('/dashboard', [DashboardHomeController::class, 'index'])->name('dashboard');
 
     Route::get('/dashboard/nieuws', [DashboardNewsController::class, 'index'])->name('dashboard.news');

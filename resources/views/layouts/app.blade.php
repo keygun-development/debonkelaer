@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="relative min-h-screen">
-    <x:notify-messages/>
+    @include('notify::components.notify')
     @notifyJs
     <div id="header">
         @include('partials.navigation')
