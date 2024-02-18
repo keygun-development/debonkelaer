@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('pageTitle') (Dashboard) - TC Lievelde</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 <body>
 <div class="relative max-h-screen min-h-screen md:overflow-hidden">
@@ -28,5 +29,4 @@
         </div>
     </div>
 </div>
-@vite(['resources/js/app.js'])
 </body>

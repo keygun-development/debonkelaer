@@ -5,7 +5,6 @@ import Popup from "./components/Popup.vue";
 import Calendar from "./components/Calendar.vue";
 import MobileMenu from "./components/MobileMenu.vue";
 import Editor from "./components/Editor.vue";
-import '../css/app.scss';
 import './font-awesome';
 import Alpine from 'alpinejs';
 

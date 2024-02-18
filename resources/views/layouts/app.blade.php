@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('pageTitle') - TC Lievelde</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 <body>
 <div class="relative min-h-screen">
@@ -30,5 +31,4 @@
         @include('partials.footer')
     </div>
 </div>
-@vite(['resources/js/app.js'])
 </body>
