@@ -35,6 +35,7 @@ Route::get('/tarieven', [PricesController::class, 'index'])->name('prices');
 Route::get('/reglement', [RegulationController::class, 'index'])->name('regulations');
 Route::get('/impressies', [ImpressionController::class, 'index'])->name('impressions');
 Route::get('/phpinfo', fn () => phpinfo());
+Route::fallback(fn () => view('404'));
 
 Route::middleware('auth')->group(function (): void {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
