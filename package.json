@@ -20,7 +20,7 @@
         "@fortawesome/fontawesome-svg-core": "^6.5.2",
         "@fortawesome/free-brands-svg-icons": "^6.5.2",
         "@fortawesome/free-regular-svg-icons": "^6.5.2",
-        "@fortawesome/free-solid-svg-icons": "^6.5.1",
+        "@fortawesome/free-solid-svg-icons": "^6.5.2",
         "@fullcalendar/core": "^5.11.3",
         "@fullcalendar/daygrid": "^5.11.5",
         "@fullcalendar/list": "^5.11.5",
