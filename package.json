@@ -3,7 +3,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "lint":  "vite build"
+        "lint": "vite build"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.7",
@@ -24,9 +24,9 @@
         "@fullcalendar/core": "^5.11.3",
         "@fullcalendar/daygrid": "^5.11.5",
         "@fullcalendar/list": "^5.11.5",
-        "@tinymce/tinymce-vue": "^5.1.1",
         "@vitejs/plugin-vue": "^3.2.0",
         "autoprefixer": "^10.4.19",
+        "quill": "^2.0.2",
         "sass": "^1.77.1",
         "sass-loader": "^14.2.1",
         "swiper": "^8.4.5",

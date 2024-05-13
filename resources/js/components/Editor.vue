@@ -1,38 +1,55 @@
 <template>
-    <div id="app">
-        <editor
-            name="postcontent"
-            v-model="content"
-            api-key="fyqf04lt7rkwyb2yvkpp25egrhbx75itwx71nfc541t0ckef"
-            :init="{
-            resize: false,
-         height: 400,
-         menubar: false,
-         toolbar:
-           'undo redo | formatselect | bold italic backcolor | \
-           alignleft aligncenter alignright alignjustify | \
-           bullist numlist outdent indent | removeformat | help'
-       }"
-        />
+    <div>
+        <div ref="editor"></div>
+        <input type="hidden" name="postcontent" v-model="editorContent">
     </div>
 </template>
-
 <script>
-import Editor from '@tinymce/tinymce-vue'
+import Quill from "quill";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.bubble.css";
+import "quill/dist/quill.snow.css";
 
 export default {
+    props: {
+        text: {
+            type: String,
+            default: "",
+        },
+        name: {
+            type: String,
+            default: "editor",
+        },
+    },
     data() {
         return {
-            content: this.text
-        }
+            editor: null,
+            editorContent: this.text,
+        };
     },
+    mounted() {
+        var _this = this;
 
-    components: {
-        'editor': Editor
+        this.editor = new Quill(this.$refs.editor, {
+            modules: {
+                toolbar: [
+                    [
+                        {
+                            header: [1, 2, 3, 4, false],
+                        },
+                    ],
+                    ["bold", "italic", "underline", "link"],
+                ],
+            },
+            theme: "snow",
+            formats: ["bold", "underline", "header", "italic", "link"],
+            placeholder: "Typ hier iets!",
+        });
+        this.editor.root.innerHTML = this.text;
+        this.editor.on("text-change", function () {
+            _this.editorContent = _this.editor.root.innerHTML;
+            _this.$emit("update:text", _this.editorContent);
+        });
     },
-
-    props: {
-        text: String
-    }
-}
+};
 </script>
