@@ -12,7 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "ext-gd": "*",
-        "nunomaduro/collision": "^6.4.0",
+        "nunomaduro/collision": "^7.10.0",
         "mckenziearts/laravel-notify": "^2.3"
     },
     "require-dev": {
